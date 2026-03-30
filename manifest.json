@@ -1,0 +1,22 @@
+{
+  "name": "WAWA Games",
+  "short_name": "WAWA",
+  "description": "Choisis ton jeu et amuse-toi !",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#2d2d3a",
+  "theme_color": "#393b4a",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
