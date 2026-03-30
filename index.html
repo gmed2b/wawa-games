@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>WAWA Games</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700;800;900&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  min-height:100vh;
+  background:#2d2d3a;
+  font-family:'Nunito',sans-serif;
+  overflow-x:hidden;
+  color:#fff;
+}
+
+/* === TOP NAV BAR === */
+.topbar{
+  width:100%;
+  height:56px;
+  background:#393b4a;
+  display:flex;
+  align-items:center;
+  padding:0 24px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.topbar-logo{
+  font-family:'Fredoka One',cursive;
+  font-size:1.5rem;
+  background:linear-gradient(135deg,#ff6bcc,#5bf0ee,#ffe156);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  letter-spacing:1px;
+}
+.topbar-search{
+  margin-left:24px;
+  flex:1;
+  max-width:420px;
+  position:relative;
+}
+.topbar-search input{
+  width:100%;
+  padding:8px 14px 8px 38px;
+  border-radius:20px;
+  border:2px solid #555;
+  background:#2d2d3a;
+  color:#ccc;
+  font-size:0.85rem;
+  font-family:'Nunito',sans-serif;
+  outline:none;
+  transition:border 0.2s;
+}
+.topbar-search input:focus{border-color:#5bf0ee;}
+.topbar-search svg{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;height:16px;
+  fill:#777;
+}
+.topbar-right{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.topbar-coins{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#2d2d3a;
+  padding:6px 14px;
+  border-radius:20px;
+  font-weight:800;
+  font-size:0.85rem;
+  color:#ffe156;
+}
+.topbar-avatar{
+  width:34px;height:34px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff6bcc,#7c4dff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  cursor:pointer;
+  box-shadow:0 0 0 2px #5bf0ee;
+}
+
+/* === HERO BANNER === */
+.hero{
+  width:100%;
+  padding:48px 24px 36px;
+  background:linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero h1{
+  font-family:'Fredoka One',cursive;
+  font-size:2.6rem;
+  text-shadow:0 3px 20px rgba(0,0,0,0.4);
+  margin-bottom:6px;
+  position:relative;
+}
+.hero p{
+  font-size:1rem;
+  opacity:0.9;
+  font-weight:700;
+  position:relative;
+}
+
+/* === SECTION === */
+.section{
+  max-width:1100px;
+  margin:0 auto;
+  padding:28px 20px 40px;
+}
+.section-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+.section-header h2{
+  font-family:'Fredoka One',cursive;
+  font-size:1.35rem;
+  color:#eee;
+}
+.section-header .badge{
+  background:#5bf0ee;
+  color:#1a1a2e;
+  font-size:0.7rem;
+  font-weight:900;
+  padding:3px 10px;
+  border-radius:12px;
+}
+
+/* === GAME CARDS GRID === */
+.games-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:20px;
+}
+
+.game-card{
+  background:#393b4a;
+  border-radius:16px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform 0.22s, box-shadow 0.22s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+.game-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 12px 32px rgba(0,0,0,0.5);
+}
+
+.card-thumb{
+  width:100%;
+  height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.card-thumb .thumb-emoji{
+  font-size:4.5rem;
+  filter:drop-shadow(0 4px 20px rgba(0,0,0,0.4));
+  z-index:2;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+.card-thumb .thumb-bg{
+  position:absolute;
+  inset:0;
+  opacity:0.15;
+}
+.card-thumb .thumb-overlay{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:60px;
+  background:linear-gradient(transparent,#393b4a);
+  z-index:1;
+}
+
+/* playing count */
+.card-playing{
+  position:absolute;
+  top:12px;right:12px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(6px);
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:0.7rem;
+  font-weight:800;
+  color:#5bf0ee;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.card-playing .dot{
+  width:7px;height:7px;
+  background:#00e676;
+  border-radius:50%;
+  animation:pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.5;transform:scale(0.8);}
+}
+
+.card-info{
+  padding:14px 16px 18px;
+}
+.card-title{
+  font-family:'Fredoka One',cursive;
+  font-size:1.15rem;
+  margin-bottom:4px;
+}
+.card-desc{
+  font-size:0.78rem;
+  color:#999;
+  font-weight:600;
+  line-height:1.4;
+  margin-bottom:10px;
+}
+.card-tags{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.tag{
+  padding:3px 10px;
+  border-radius:10px;
+  font-size:0.65rem;
+  font-weight:800;
+  background:rgba(255,255,255,0.06);
+  color:#aaa;
+}
+
+.card-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px 14px;
+}
+.card-rating{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  font-size:0.75rem;
+  color:#ffe156;
+  font-weight:800;
+}
+.card-btn{
+  padding:7px 20px;
+  border-radius:20px;
+  border:none;
+  font-family:'Fredoka One',cursive;
+  font-size:0.75rem;
+  color:#fff;
+  cursor:pointer;
+  transition:all 0.2s;
+  letter-spacing:0.5px;
+}
+.card-btn:hover{
+  filter:brightness(1.15);
+  transform:scale(1.05);
+}
+
+/* individual card colors */
+.card-wawa .card-thumb{background:linear-gradient(135deg,#0a0020,#1a0040);}
+.card-wawa .card-btn{background:linear-gradient(135deg,#ff00b4,#7700ff);}
+.card-wawa .card-title{color:#ff6bcc;}
+
+.card-tetris .card-thumb{background:linear-gradient(135deg,#050510,#0a1030);}
+.card-tetris .card-btn{background:linear-gradient(135deg,#00c8ff,#0055ff);}
+.card-tetris .card-title{color:#5bf0ee;}
+
+.card-morpion .card-thumb{background:linear-gradient(135deg,#1a1a2e,#0f3460);}
+.card-morpion .card-btn{background:linear-gradient(135deg,#ff8c00,#ff3d00);}
+.card-morpion .card-title{color:#ffe156;}
+
+/* === FOOTER === */
+.footer{
+  text-align:center;
+  padding:32px 20px;
+  color:#555;
+  font-size:0.75rem;
+  font-weight:700;
+  border-top:1px solid #333;
+  margin-top:20px;
+}
+
+/* === RESPONSIVE === */
+@media(max-width:600px){
+  .topbar-search{display:none;}
+  .hero h1{font-size:1.8rem;}
+  .games-grid{grid-template-columns:1fr;}
+  .card-thumb{height:150px;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">WAWA</div>
+  <div class="topbar-search">
+    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <input type="text" placeholder="Rechercher un jeu..." id="searchInput">
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-coins">
+      <span>&#x1FA99;</span>
+      <span>1,250</span>
+    </div>
+    <div class="topbar-avatar">W</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>WAWA Games</h1>
+  <p>Choisis ton jeu et amuse-toi !</p>
+</div>
+
+<!-- GAMES SECTION -->
+<div class="section">
+  <div class="section-header">
+    <h2>Mes Jeux</h2>
+    <span class="badge">3 JEUX</span>
+  </div>
+
+  <div class="games-grid" id="gamesGrid">
+
+    <!-- WAWAMIYA -->
+    <a href="wawamiya.html" class="game-card card-wawa">
+      <div class="card-thumb">
+        <div class="card-playing"><div class="dot"></div>2.4k joueurs</div>
+        <span class="thumb-emoji">🏃‍♂️</span>
+        <div class="thumb-overlay"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-title">Wawamiya</div>
+        <div class="card-desc">Runner cyberpunk avec 6 niveaux, skins et double saut. Cours, saute et esquive les obstacles !</div>
+        <div class="card-tags">
+          <span class="tag">Runner</span>
+          <span class="tag">Cyberpunk</span>
+          <span class="tag">Niveaux</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 4.8</div>
+        <button class="card-btn">JOUER</button>
+      </div>
+    </a>
+
+    <!-- TETRIS -->
+    <a href="tetris.html" class="game-card card-tetris">
+      <div class="card-thumb">
+        <div class="card-playing"><div class="dot"></div>1.8k joueurs</div>
+        <span class="thumb-emoji">🧱</span>
+        <div class="thumb-overlay"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-title">Tetris Néon</div>
+        <div class="card-desc">Le classique revisité avec un style néon futuriste. Empile les blocs et fais des lignes !</div>
+        <div class="card-tags">
+          <span class="tag">Puzzle</span>
+          <span class="tag">Classique</span>
+          <span class="tag">Néon</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-rating">&#9733;&#9733;&#9733;&#9733;&#9734; 4.5</div>
+        <button class="card-btn">JOUER</button>
+      </div>
+    </a>
+
+    <!-- MORPION -->
+    <a href="morpion.html" class="game-card card-morpion">
+      <div class="card-thumb">
+        <div class="card-playing"><div class="dot"></div>950 joueurs</div>
+        <span class="thumb-emoji">❌⭕</span>
+        <div class="thumb-overlay"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-title">Morpion</div>
+        <div class="card-desc">Tic-Tac-Toe stylé avec des effets visuels. Défie tes amis dans un duel stratégique !</div>
+        <div class="card-tags">
+          <span class="tag">Stratégie</span>
+          <span class="tag">2 Joueurs</span>
+          <span class="tag">Casual</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-rating">&#9733;&#9733;&#9733;&#9733;&#9734; 4.3</div>
+        <button class="card-btn">JOUER</button>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">WAWA Games &copy; 2026 &mdash; Tous droits r&eacute;serv&eacute;s</div>
+
+<script>
+// Simple search filter
+document.getElementById('searchInput').addEventListener('input', function(){
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.game-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q) ? '' : 'none';
+  });
+});
+</script>
+</body>
+</html>
